@@ -9,5 +9,5 @@ console = Console()
 
 
 @app.command("view")
-def view_projects() -> None:
+def view_recall() -> None:
     console.print("Listing all the projects")

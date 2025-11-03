@@ -9,5 +9,5 @@ console = Console()
 
 
 @app.command("remove")
-def remove_project(project: str) -> None:
+def remove_recall(project: str) -> None:
     console.print("Removing: {project}.")

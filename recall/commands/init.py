@@ -8,6 +8,6 @@ app = typer.Typer()
 console = Console()
 
 
-@app.command("get")
-def recall_project(project: str) -> None:
+@app.command("init")
+def init_recall(project: str) -> None:
     console.print("Opening: {project}.")

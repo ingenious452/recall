@@ -9,5 +9,5 @@ console = Console()
 
 
 @app.command("update")
-def update_project(project: str) -> None:
+def update_recall(project: str) -> None:
     console.print("Updating: {project}.")
