@@ -6,6 +6,7 @@ readme = "README.md"
 requires-python = ">=3.12"
 dependencies = [
     "rich>=14.2.0",
+    "tomli-w>=1.2.0",
     "typer>=0.20.0",
 ]
 

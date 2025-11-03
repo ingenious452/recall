@@ -3,9 +3,8 @@ import typer
 from typing import Annotated, Optional
 from rich.console import Console
 
-from recall.commands import get, add, update, view, remove
+from recall.commands import init, get, add, update, view, remove
 from recall import __version__, __app_name__
-
 
 
 HELP_DESCRIPTION = "A powerful, ultra-fast command-line tool for navigating to your most important project directories instantly."
@@ -14,9 +13,7 @@ HELP_DESCRIPTION = "A powerful, ultra-fast command-line tool for navigating to y
 app = typer.Typer(no_args_is_help=True, help=HELP_DESCRIPTION)
 
 
-
 console = Console()
-
 
 
 def version_callback(value: bool):
@@ -35,8 +32,8 @@ def main(ctx: typer.Context,
     pass
 
 
-
-app.add_typer(get.app, )
+app.add_typer(init.app)
+app.add_typer(get.app)
 app.add_typer(view.app)
 app.add_typer(add.app)
 app.add_typer(remove.app)
