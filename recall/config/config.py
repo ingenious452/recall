@@ -7,12 +7,11 @@ import tomli_w
 from dataclasses import dataclass
 
 
-APP_DIR = Path(__file__).resolve().parent.parent
+APP_DIR = Path(__file__).resolve().parent.parent.parent
 
-
-LOG_DIR = APP_DIR / "logs"
+LOGS_DIR = APP_DIR / "logs"
 CONFIG_DIR = APP_DIR / "config"
-DATA_DIR = APP_DIR / "data"
+DATA_DIR = APP_DIR / "database"
 
 DATABASE_FILE = DATA_DIR / "recall.json"
 CONFIG_FILE = CONFIG_DIR / "config.toml"
@@ -21,19 +20,22 @@ CONFIG_FILE = CONFIG_DIR / "config.toml"
 DEFAULT_CONFIGURATION: Dict[str, Any] = {
     "app": {
         "init": False,
+        "config": CONFIG_FILE.as_posix(),
         "database": DATABASE_FILE.as_posix(),
-        "logs": LOG_DIR.as_posix()
+        "logs": LOGS_DIR.as_posix()
+
     },
 }
 
 
 @dataclass(frozen=True)
 class Config:
-    
+    # remember we have not put all the FILES here as attribute cause that it will be static
+    # and we want to read the values from the config file instead.
     APP_DIR: Path = APP_DIR
     CONFIG_DIR: Path = CONFIG_DIR
     DATA_DIR: Path = DATA_DIR
-    CONFIG_FILE = CONFIG_FILE
+    CONFIG_FILE: Path = CONFIG_FILE
 
     @property
     def CONFIGURATION(self) -> Dict[str, Any]:
@@ -45,41 +47,42 @@ class Config:
             return DEFAULT_CONFIGURATION
 
     @property
-    def DATABASE_FILE(self) -> str:
+    def DATABASE_FILE(self) -> Path:
         # TODO: Add exception handling while reading the file
-        return self.CONFIGURATION["app"]["database"]
+        return Path(self.CONFIGURATION["app"]["database"])
     
     @property
-    def LOG_DIR(self) -> Path:
+    def LOGS_DIR(self) -> Path:
         # TODO: Add exception handling while reading the file
-        return self.CONFIGURATION["app"]["logs"]
+        return Path(self.CONFIGURATION["app"]["logs"])
     
     @property
     def INITIALIZED(self) -> bool:
         # TODO: Add exception handling while reading the file
         return self.CONFIGURATION["app"].get("init", False)
     
-    def init_config(self, db_path: Optional[Path], log_path: Optional[Path]) -> bool:
+    def init_config(self, db_file: Optional[Path], logs_dir: Optional[Path]) -> bool:
         
-        # self.CONFIG_DIR.mkdir(parents=True, exist_ok=True)
+        self.CONFIG_DIR.mkdir(parents=True, exist_ok=True)
         self.CONFIG_FILE.touch(exist_ok=True)
         
-        database = db_path or DATABASE_FILE
-        log = log_path or LOG_DIR
+        database = db_file or DATABASE_FILE   # using self.DATABASE_FILE will cause very bad error cause it is not yet set
+        logs = logs_dir or LOGS_DIR
 
         if database.exists() and database.is_dir():
             raise ValueError("Expected a file path got directory instead.")
         
         database.parent.mkdir(parents=True, exist_ok=True)
-        log.mkdir(parents=True, exist_ok=True)
+        logs.mkdir(parents=True, exist_ok=True)
 
         DEFAULT_CONFIGURATION["app"]["database"] = database.as_posix()
-        DEFAULT_CONFIGURATION["app"]["logs"] = log.as_posix()
+        DEFAULT_CONFIGURATION["app"]["logs"] = logs.as_posix()
         DEFAULT_CONFIGURATION["app"]["init"] = True
 
-        with open(CONFIG_FILE, "wb") as file:
+        with open(self.CONFIG_FILE, "wb") as file:
             tomli_w.dump(DEFAULT_CONFIGURATION, file)
         return True
 
 
 config = Config()
+

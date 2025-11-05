@@ -5,7 +5,7 @@ import typer
 from rich.console import Console
 
 from recall.config import config
-from recall.core import database
+from recall.core import init_service
 
 
 app = typer.Typer()
@@ -18,16 +18,14 @@ console = Console()
 def init_recall(db_file: Annotated[Optional[Path], 
                                    typer.Option("--db-file", 
                                                 help="Database file path initialization.")] = None,
-                 log_dir: Annotated[Optional[Path], 
-                                    typer.Option("--log-dir", 
+                 logs_dir: Annotated[Optional[Path],
+                                    typer.Option("--logs-dir",
                                                  help="Logs directory path.")] = None, 
                  force: Annotated[bool, 
                                   typer.Option("--force", "-f", 
                                                help="Force initialization app.")] = False) -> None:
 
     if not config.INITIALIZED or force:
-        config.init_config(db_file, log_dir)
-        database.init_database(Path(config.DATABASE_FILE))
-        console.print("[green]Successfully[/green] intialized recall.")
+        init_service(db_file, logs_dir)
     else:
-        console.print("[dim]Already initialized.[/dim]")
+        console.print("[dim]already initialized. use -f switch to force initialize[/dim]")

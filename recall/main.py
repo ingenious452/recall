@@ -3,8 +3,8 @@ import typer
 from typing import Annotated, Optional
 from rich.console import Console
 
-from recall.commands import init, get, add, update, view, remove
-from recall import __version__, __app_name__
+from recall.commands import init, get, add, update, show, remove
+from recall import __version__, __appname__
 
 
 HELP_DESCRIPTION = "A powerful, ultra-fast command-line tool for navigating to your most important project directories instantly."
@@ -18,7 +18,7 @@ console = Console()
 
 def version_callback(value: bool):
     if value:
-        console.print(f"{__app_name__} v.[green]{__version__}[/green]")
+        console.print(f"{__appname__} v.[green]{__version__}[/green]")
         raise typer.Exit()
 
 
@@ -27,14 +27,14 @@ def main(ctx: typer.Context,
          version: Annotated[Optional[bool], 
                             typer.Option("--version", "-v", 
                                          callback=version_callback, 
-                                         is_eager=True, help=f"show the current {__app_name__} version")] = None,
+                                         is_eager=True, help=f"show the current {__appname__} version")] = None,
 ):
     pass
 
 
 app.add_typer(init.app)
 app.add_typer(get.app)
-app.add_typer(view.app)
+app.add_typer(show.app)
 app.add_typer(add.app)
 app.add_typer(remove.app)
 app.add_typer(update.app)

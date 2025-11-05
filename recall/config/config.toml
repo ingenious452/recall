@@ -1,4 +1,0 @@
-[app]
-init = true
-database = "D:/python/recall_v2/recall/data/recall.json"
-logs = "D:/python/recall_v2/recall/logs"
