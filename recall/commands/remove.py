@@ -22,12 +22,13 @@ console = Console()
 @app.command("remove")
 def remove_recall(recall_name: Annotated[str, typer.Argument(help="name to be removed from index")]) -> None:
 
-    console.print(f"removing [cyan]'{recall_name}'[/cyan] from index")
     # console.print(f"path: [grey53]{recall_path}[/grey53]")
     # we don't need to validate that some data has been passed as "" to recall name and path cause it will be validated by recall name and path
     # lower the case for recall name and convert Path to str
 
     __ = typer.confirm(f"are you sure you want to remove {recall_name} from index?", abort=True)
+    console.print(f"removing [cyan]'{recall_name}'[/cyan] from index")
+
 
     try:
         orchest = get_orchestrator()

@@ -1,7 +1,14 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
 [project]
-name = "recall-v2"
-version = "0.1.0"
-description = "Add your description here"
+name = "recallrecall_ingenious"
+version = "0.2.0"
+authors = [
+  { name="{^^}", email="drkwolf52@gmail.com" },
+]
+description = "Recall is a command line application project directories tracker"
 readme = "README.md"
 requires-python = ">=3.12"
 dependencies = [

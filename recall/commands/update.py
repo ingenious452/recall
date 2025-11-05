@@ -27,7 +27,7 @@ def update_recall(recall_name: Annotated[str, typer.Argument(help="Project name 
     # take confirmation
 
 
-    __ = typer.confirm(f"Are you sure you want to update '{recall_name}'[{recall_path}]?", abort=True)
+    __ = typer.confirm(f"Are you sure you want to update '{recall_name}' path to {recall_path}?", abort=True)
     console.print(f"updating [cyan]'{recall_name}'[/cyan] to path: {recall_path} in index")
 
 
