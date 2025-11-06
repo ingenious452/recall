@@ -27,5 +27,6 @@ def init_recall(db_file: Annotated[Optional[Path],
 
     if not config.INITIALIZED or force:
         init_service(db_file, logs_dir)
+        console.print("[green]successfully[/green] initialized")
     else:
         console.print("[dim]already initialized. use -f switch to force initialize[/dim]")
