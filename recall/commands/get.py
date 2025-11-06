@@ -29,7 +29,8 @@ def recall_project(recall_id: Annotated[Optional[int], typer.Argument(help="open
 
     try:
         orchest = get_orchestrator()
-        a = orchest.get(index)
+        index_path = orchest.get(index)
+        typer.launch(index_path)
         print(f"path is: {a}")
     except RecallInitError as e:
         console.print(Padding(f"[yellow]warning:[/yellow] {e}, please run 'recall init' or use '-f' switch to force init.", (1, 0, 0, 0)))
