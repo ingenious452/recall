@@ -54,9 +54,9 @@ wheels = [
 ]
 
 [[package]]
-name = "recall-v2"
-version = "0.1.0"
-source = { virtual = "." }
+name = "recall-ingenious"
+version = "0.3.0"
+source = { editable = "." }
 dependencies = [
     { name = "rich" },
     { name = "tomli-w" },
