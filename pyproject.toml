@@ -3,7 +3,7 @@ requires = ["hatchling"]
 build-backend = "hatchling.build"
 
 [project]
-name = "recallrecall_ingenious"
+name = "recall_ingenious"
 version = "0.2.0"
 authors = [
   { name="{^^}", email="drkwolf52@gmail.com" },
@@ -11,11 +11,23 @@ authors = [
 description = "Recall is a command line application project directories tracker"
 readme = "README.md"
 requires-python = ">=3.12"
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "Operating System :: OS Independent",
+]
+license = "MIT"
 dependencies = [
     "rich>=14.2.0",
     "tomli-w>=1.2.0",
     "typer>=0.20.0",
 ]
 
+[project.urls]
+Homepage = "https://github.com/ingenious452/recall.git"
+Repository = "https://github.com/ingenious452/recall.git"
+
 [project.scripts]
 recall = "recall.main:app"
+
+[tool.hatch.build.targets.wheel]
+packages = ["recall/"]

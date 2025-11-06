@@ -17,14 +17,14 @@ recall get <id> --name
 2. Save directory
 
 ```cmd
-recall save <project_name> --path <project_path>
+recall add <project_name> --path <project_path>
 ```
 ```--path``` defaults to the **current working directory**
 
 3. Delete directory
 
 ```cmd
-recall delete <project_name>
+recall remove <project_name>
 ```
 
 4. Update directory
