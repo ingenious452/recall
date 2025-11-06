@@ -29,5 +29,7 @@ Repository = "https://github.com/ingenious452/recall.git"
 [project.scripts]
 recall = "recall.main:app"
 
-[tool.hatch.build.targets.wheel]
-packages = ["recall/"]
+[tool.hatch.build]
+include = [
+  "recall/**",
+]

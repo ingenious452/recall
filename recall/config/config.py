@@ -7,7 +7,7 @@ import tomli_w
 from dataclasses import dataclass
 
 
-APP_DIR = Path(__file__).resolve().parent.parent.parent
+APP_DIR = Path(__file__).home().resolve() / ".recall"
 
 LOGS_DIR = APP_DIR / "logs"
 CONFIG_DIR = APP_DIR / "config"

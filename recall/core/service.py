@@ -11,7 +11,7 @@ from typing import Any, Dict, Self, Optional
 
 from recall.config import config
 
-from recall.data import get_db, JsonDatabaseManager, init_db
+from recall.data import get_db, init_db, JsonDatabaseManager
 from recall.utils.decorators import with_datbase_access
 
 from recall.errors import (
