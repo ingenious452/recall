@@ -28,14 +28,14 @@ def update_recall(recall_name: Annotated[str, typer.Argument(help="Project name 
 
 
     __ = typer.confirm(f"Are you sure you want to update '{recall_name}' path to {recall_path}?", abort=True)
-    console.print(f"updating [cyan]'{recall_name}'[/cyan] to path: {recall_path} in index")
+    console.print(f"[bold]updating[/bold] [cyan]'{recall_name}'[/cyan] to path: {recall_path} in index")
 
 
     try:
         orchest = get_orchestrator()
         indexed_path = orchest.update(recall_name.lower(), recall_path.as_posix())
 
-        console.print(Padding(f"[green]success:[/green] [cyan]'{recall_name}'[/cyan], path: [grey53]{indexed_path}[/grey53] -> [blue]{recall_path}[/blue] updated in index.", (1, 0, 0, 0)))
+        console.print(Padding(f"[green]success:[/green] [cyan]'{recall_name}'[/cyan], path: [grey53]'{indexed_path}'[/grey53] -> [blue]{recall_path}[/blue] updated in index.", (1, 0, 0, 0)))
     except RecallInitError as e:
         console.print(Padding(f"[yellow]warning:[/yellow] {e}, please run 'recall init' or use '-f' switch to force init.", (1, 0, 0, 0)))
     except RecallReadError as e:

@@ -27,7 +27,7 @@ def add_recall(recall_name: Annotated[str, typer.Argument(help="recall name to a
                recall_path: Annotated[Path, typer.Option("--path", "-p", help="path to add to index.")] = Path.cwd()) -> None:
 
     # TODO: Duplicate path can be added with different project name.
-    console.print(f"adding [cyan]'{recall_name}'[/cyan], path: [grey53]{recall_path}[/grey53] to index")
+    console.print(f"[bold]adding[/bold] [cyan]'{recall_name}'[/cyan], path: [grey53]{recall_path}[/grey53] to index")
     # console.print(f"path: [grey53]{recall_path}[/grey53]")
     # we don't need to validate that some data has been passed as "" to recall name and path cause it will be validated by recall name and path
     # lower the case for recall name and convert Path to str

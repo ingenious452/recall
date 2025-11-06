@@ -27,7 +27,7 @@ def remove_recall(recall_name: Annotated[str, typer.Argument(help="name to be re
     # lower the case for recall name and convert Path to str
 
     __ = typer.confirm(f"are you sure you want to remove {recall_name} from index?", abort=True)
-    console.print(f"removing [cyan]'{recall_name}'[/cyan] from index")
+    console.print(f"[bold]removing[/bold] [cyan]'{recall_name}'[/cyan] from index")
 
 
     try:
