@@ -1,3 +1,4 @@
+import os
 from typing import Annotated, Optional
 
 import typer
@@ -30,8 +31,7 @@ def recall_project(recall_id: Annotated[Optional[int], typer.Argument(help="open
     try:
         orchest = get_orchestrator()
         index_path = orchest.get(index)
-        typer.launch(index_path)
-        print(f"path is: {a}")
+        os.startfile(index_path)
     except RecallInitError as e:
         console.print(Padding(f"[yellow]warning:[/yellow] {e}, please run 'recall init' or use '-f' switch to force init.", (1, 0, 0, 0)))
     except RecallNotFoundError as e:
